@@ -53,17 +53,17 @@ namespace Snake
             void DrawCanvas()
             {
                 // draw the background
-                var border = new string(Game.BorderCharacter[0], Game.Size.Width);
-                foreach (var index in Enumerable.Range(0, Game.Size.Height))
+                var border = new string(Settings.BorderCharacter[0], Settings.Size.Width);
+                foreach (var index in Enumerable.Range(0, Settings.Size.Height))
                 {
-                    Draw(border, 0, index, Game.BorderForeground, Game.BorderBackground);
+                    Draw(border, 0, index, Settings.BorderForeground, Settings.BorderBackground);
                 }
 
                 // draw the foreground
-                var canvas = new string(Game.CanvasCharacter[0], Game.CanvasWidth);
-                foreach (var index in Enumerable.Range(1, Game.CanvasHeight))
+                var canvas = new string(Settings.CanvasCharacter[0], Settings.CanvasWidth);
+                foreach (var index in Enumerable.Range(1, Settings.CanvasHeight))
                 {
-                    Draw(canvas, 1, index, Game.CanvasForeground, Game.CanvasBackground);
+                    Draw(canvas, 1, index, Settings.CanvasForeground, Settings.CanvasBackground);
                 }
             }
         }
@@ -77,19 +77,19 @@ namespace Snake
             _snake.AddRange(new[] { Game.Head }.Union(Game.Tail));
 
             // draw the snake head
-            Draw(Game.SnakeHeadCharacter, Game.Head, Game.SnakeHeadForeground, Game.SnakeHeadBackground);
+            Draw(Settings.SnakeHeadCharacter, Game.Head, Settings.SnakeHeadForeground, Settings.SnakeHeadBackground);
 
             // draw the snake tail
-            Draw(Game.SnakeTailCharacter, Game.Tail, Game.SnakeTailForeground, Game.SnakeTailBackground);
+            Draw(Settings.SnakeTailCharacter, Game.Tail, Settings.SnakeTailForeground, Settings.SnakeTailBackground);
 
             // draw the fruit
-            Draw(Game.FruitCharacter, Game.Fruit, Game.FruitForeground, Game.FruitBackground);
+            Draw(Settings.FruitCharacter, Game.Fruit, Settings.FruitForeground, Settings.FruitBackground);
 
             void Erase()
             {
                 foreach (var point in _snake)
                 {
-                    Draw(Game.CanvasCharacter, point, Game.CanvasForeground, Game.CanvasBackground);
+                    Draw(Settings.CanvasCharacter, point, Settings.CanvasForeground, Settings.CanvasBackground);
                 }
                 _snake.Clear();
             }
@@ -141,10 +141,10 @@ namespace Snake
             if (Game.Direction == Direction.Up)
             {
                 // hit the top border
-                if (Game.Head.Y - 1 == Game.BorderTop)
+                if (Game.Head.Y - 1 == Settings.BorderTop)
                 {
                     // move to bottom edge
-                    Game.Head.Y = Game.BorderBottom - 1;
+                    Game.Head.Y = Settings.BorderBottom - 1;
                 }
                 else
                 {
@@ -155,10 +155,10 @@ namespace Snake
             else if (Game.Direction == Direction.Down)
             {
                 // hit the bottom border
-                if (Game.Head.Y + 1 == Game.BorderBottom)
+                if (Game.Head.Y + 1 == Settings.BorderBottom)
                 {
                     // move to top edge
-                    Game.Head.Y = Game.BorderTop + 1;
+                    Game.Head.Y = Settings.BorderTop + 1;
                 }
                 else
                 {
@@ -169,10 +169,10 @@ namespace Snake
             else if (Game.Direction == Direction.Left)
             {
                 // hit the left border
-                if (Game.Head.X - 1 == Game.BorderLeft)
+                if (Game.Head.X - 1 == Settings.BorderLeft)
                 {
                     // move to right edge
-                    Game.Head.X = Game.BorderRight - 1;
+                    Game.Head.X = Settings.BorderRight - 1;
                 }
                 else
                 {
@@ -183,10 +183,10 @@ namespace Snake
             else if (Game.Direction == Direction.Right)
             {
                 // hit the right border
-                if (Game.Head.X + 1 == Game.BorderRight)
+                if (Game.Head.X + 1 == Settings.BorderRight)
                 {
                     // move to left edge
-                    Game.Head.X = Game.BorderLeft + 1;
+                    Game.Head.X = Settings.BorderLeft + 1;
                 }
                 else
                 {
@@ -198,13 +198,13 @@ namespace Snake
 
         public static void Score()
         {
-            Draw(Game.UserName.ToUpper(), Game.ScoreboardLeft, 3, ConsoleColor.White, ConsoleColor.Black);
-            Draw("----------", Game.ScoreboardLeft, 4, ConsoleColor.White, ConsoleColor.Black);
-            Draw($"Score: {Game.Tail.Count()}", Game.ScoreboardLeft, 5, ConsoleColor.White, ConsoleColor.Black);
+            Draw(Game.UserName.ToUpper(), Settings.ScoreboardLeft, 3, ConsoleColor.White, ConsoleColor.Black);
+            Draw("----------", Settings.ScoreboardLeft, 4, ConsoleColor.White, ConsoleColor.Black);
+            Draw($"Score: {Game.Tail.Count()}", Settings.ScoreboardLeft, 5, ConsoleColor.White, ConsoleColor.Black);
             if (Game.GameOver)
             {
-                Draw("GAME OVER", Game.ScoreboardLeft, 6, ConsoleColor.Red, ConsoleColor.White);
-                Draw($"Spacebar to play again", Game.ScoreboardLeft, 7, ConsoleColor.Black, ConsoleColor.Gray);
+                Draw("GAME OVER", Settings.ScoreboardLeft, 6, ConsoleColor.Red, ConsoleColor.White);
+                Draw($"Spacebar to play again", Settings.ScoreboardLeft, 7, ConsoleColor.Black, ConsoleColor.Gray);
             }
         }
 
